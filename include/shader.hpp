@@ -14,7 +14,7 @@ class Shader
 public:
 	unsigned int	ID;
 
-	Shader(const char *vertexPath, const char *fragmentPath);
+	Shader(std::string vertexPath, std::string fragmentPath);
 
 	void	use(void);
 
@@ -23,8 +23,10 @@ public:
 	void	setFloat(const std::string &name, float value)const;
 
 private:
-	void			checkCompileErrors(unsigned int shader, std::string type);
-	unsigned int	createShader(const char *shaderCode, GLenum type);
+	std::string		readFile(const std::string &filePath);
+	unsigned int	createShader(const std::string &shaderCode, GLenum type);
+	void			checkShaderErrors(unsigned int shader, GLenum type);
+	void			checkProgramErrors(unsigned int program);
 
 };
 
