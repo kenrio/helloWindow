@@ -34,15 +34,8 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath)
 	unsigned int	vertex;
 	unsigned int	fragment;
 
-	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &vShaderCode, NULL);
-	glCompileShader(vertex);
-	checkCompileErrors(vertex, "VERTEX");
-
-	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &fShaderCode, NULL);
-	glCompileShader(fragment);
-	checkCompileErrors(fragment, "FRAGMENT");
+	vertex = createShader(vShaderCode, GL_VERTEX_SHADER);
+	fragment = createShader(fShaderCode, GL_FRAGMENT_SHADER);
 
 	ID = glCreateProgram();
 	glAttachShader(ID, vertex);
@@ -76,6 +69,22 @@ void	Shader::setFloat(const std::string &name, float value) const
 {
 	glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 	return ;
+}
+
+unsigned int	Shader::createShader(const char *shaderCode, GLenum type)
+{
+	unsigned int	shader;
+
+	shader = glCreateShader(type);
+	glShaderSource(shader, 1, &shaderCode, NULL);
+	glCompileShader(shader);
+
+	std::string	typeStr;
+
+	typeStr = (type == GL_VERTEX_SHADER) ? "VERTEX" : "FRAGMENT";
+	checkCompileErrors(shader, typeStr);
+
+	return (shader);
 }
 
 void	Shader::checkCompileErrors(unsigned int shader, std::string type)

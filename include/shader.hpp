@@ -23,7 +23,8 @@ public:
 	void	setFloat(const std::string &name, float value)const;
 
 private:
-	void	checkCompileErrors(unsigned int shader, std::string type);
+	void			checkCompileErrors(unsigned int shader, std::string type);
+	unsigned int	createShader(const char *shaderCode, GLenum type);
 
 };
 
