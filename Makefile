@@ -12,11 +12,9 @@ SRC_DIR		:= src
 BIN_DIR		:= bin
 INC_DIR		:= include
 
-GLAD_DIR	:= $(INC_DIR)/glad
-KHR_DIR		:= $(INC_DIR)/KHR
-
 SRC			:= \
 			main.cpp \
+			shader.cpp \
 
 C_SRC		:= \
 			glad.c \
@@ -45,7 +43,7 @@ ifeq ($(UNAME), Darwin)
 	LDFLAGS		:= $(GL_FLAGS) $(GLFW_FLAGS)
 endif
 
-INCLUDE		:= -I$(INC_DIR) -I$(GLAD_DIR) -I$(KHR_DIR)
+INCLUDE		:= -I$(INC_DIR)
 
 all: $(NAME)
 
