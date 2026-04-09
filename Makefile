@@ -42,10 +42,10 @@ ifeq ($(UNAME), Darwin)
 	GL_FLAGS	:= -framework OpenGL
 	GLFW_FLAGS	:= -lglfw
 
-	LDFLAGS		:= $(GL_FLAGS) $(GLFW_FLAGS)
+	LDFLAGS		:= -L/opt/homebrew/lib $(GL_FLAGS) $(GLFW_FLAGS)
 endif
 
-INCLUDE		:= -I$(INC_DIR)
+INCLUDE		:= -I$(INC_DIR) -I/opt/homebrew/include
 
 all: $(NAME)
 
